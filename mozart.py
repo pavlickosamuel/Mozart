@@ -36,34 +36,62 @@ for j in range(0, 16):
     number2 = druhy[number-1][j]
     trio.append(number2)
 
-print(menuet)
-print(trio)
-
-#toto funguje
 folder = "./takty"
 menuet_paths = [f"{folder}/M{num}.wav" for num in menuet]
 trio_paths = [f"{folder}/T{num}.wav" for num in trio]
 
 
-with wave.open(menuet_paths[0], "rb") as init_src:
-    params = init_src.getparams()
+
+
+with wave.open(menuet_paths[0], "rb") as men:
+    params = men.getparams()
     frame_size = params.nchannels * params.sampwidth
 
 menuet_final = wave.open("menuet.wav", "wb")
 menuet_final.setparams(params)
 
 for i in range(len(menuet_paths)):
-    menuet_src = wave.open(menuet_paths[i], "rb")
+    men2 = wave.open(menuet_paths[i], "rb")
 
-    raw_data = menuet_src.readframes(menuet_src.getnframes())
+    raw_data = men2.readframes(men2.getnframes())
 
     individual_frames = [
         raw_data[k : k + frame_size] for k in range(0, len(raw_data), frame_size)
     ]
 
     menuet_final.writeframes(b"".join(individual_frames))
-    menuet_src.close()
+    men2.close()
 
 menuet_final.close()
+
+
+
+
+with wave.open(trio_paths[0], "rb") as tri:
+    params = tri.getparams()
+    frame_size = params.nchannels * params.sampwidth
+
+trio_final = wave.open("trio.wav", "wb")
+trio_final.setparams(params)
+
+for i in range(len(trio_paths)):
+    tri2 = wave.open(trio_paths[i], "rb")
+
+    raw_data = tri2.readframes(tri2.getnframes())
+
+    individual_frames = [
+        raw_data[k : k + frame_size] for k in range(0, len(raw_data), frame_size)
+    ]
+
+    trio_final.writeframes(b"".join(individual_frames))
+    tri2.close()
+
+trio_final.close()
+
+
+
+
+with
+
 
 
