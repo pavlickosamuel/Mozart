@@ -91,7 +91,14 @@ trio_final.close()
 
 
 
-with
+with wave.open("menuet.wav", "rb") as menf:
+    params = menf.getparams()
+    frame_size = params.nchannels * params.sampwidth
 
-
+with wave.open("trio.wav", "rb") as trif:
+    params2 = trif.getparams()
+    frame_size2 = params2.nchannels * params2.sampwidth
+    waltz_final = wave.open("waltz.wav", "wb")
+    waltz_final.setparams(params)
+    
 
