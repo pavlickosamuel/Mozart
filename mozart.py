@@ -95,10 +95,11 @@ with wave.open("menuet.wav", "rb") as menf:
     params = menf.getparams()
     frame_size = params.nchannels * params.sampwidth
 
-with wave.open("trio.wav", "rb") as trif:
-    params2 = trif.getparams()
-    frame_size2 = params2.nchannels * params2.sampwidth
-    waltz_final = wave.open("waltz.wav", "wb")
-    waltz_final.setparams(params)
-    
+final_song = wave.open("final_song.wav", "wb")
+final_song.setparams(params)
 
+for filename in ["menuet.wav", "trio.wav"]:
+    with wave.open(filename, "rb") as f:
+        final_song.writeframes(f.readframes(f.getnframes()))
+
+final_song.close()
